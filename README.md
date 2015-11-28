@@ -1,8 +1,5 @@
-samba-dfree
-===========
-
-Why
----
+Disk space correction tool for Samba
+====================================
 
 Samba service may not report correct disk space if the published path consists from several disks.
 `samba-dfree` returns total and available space calculated from all directories in the current directory.
@@ -30,4 +27,9 @@ dfree cache time = 60
 ```
 
 Restart samba service.
+
+Contributions
+-------------
+
+This is an open source software licensed under the Apache License Version 2.0. Feel free to open issues or pull requests.
 
