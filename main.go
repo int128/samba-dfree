@@ -10,14 +10,12 @@ import "syscall"
 func main() {
 	wd, err := os.Getwd()
 	if err != nil {
-		log.Printf("Error: could not get current directory (%s)\n", err)
-		return
+		panic(err)
 	}
 
 	files, err := ioutil.ReadDir(wd)
 	if err != nil {
-		log.Printf("Error: could not read current directory (%s)\n", err)
-		return
+		panic(err)
 	}
 
 	total, available := uint64(0), uint64(0)
