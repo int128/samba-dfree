@@ -1,5 +1,13 @@
 language: go
 go:
-  - 1.5.1
+- 1.5.1
 script:
-  - go build
+- go install
+deploy:
+  provider: releases
+  api_key:
+    secure: taMm/xRYkA11NKCnlTZGRAMpGGWtMFoHUz66iwK91hmJIFMMr3us4S587wqu9CNS+zoAnTtm5w9T0SQB10ZqSZPWxk+vSBAnt4RV81YCZUVsvwRYXLDH+of57tjKJ5kvYtnI9TZ/t9fa0mLiGIts6NRmUrUa78UslFz2k7RKkMoNImkhBDSIoAOjZBh91XxYIM8pKIiLewc9ZVo6YDp9PT7aKusXSlKkHrMMhYbBnuCGle82vCEV9imqm/aJKr5NnI5T8oVROVg7epdgxZ8hlHhoIVX+wEi/ucEWe/pO2NzIeMob8bjW4fKUw2NMaz1YSmYdto4RcJ5g3kt7e54wlC+yAtJTEf9cqW1pkuzMWwY416GzrBxjPiuA42FSyrGBkgAsjCopHIDNpZvvqsdU+e60LE8VeNHhUaE0xbPJMcCOB/bei+/QMx9V4uJJPGdveF9Aahbk2sanAQ+YT8s7G2CLECA0ElK1XksdzT6y0UxTJP0GGZehAXKHMMhX+NuvXbUOvnUy2loz5BFYnAQycQjfnhkTglf99ONBMW/siomGxmY/hDbD22HteEP8txUg2/kNjTQR8xZ7hq+OH2x1xJ2dqIlDWadbBVnhA0atS/DKuizG1l++4h/6YxfZ4Hr1rVuB3WKaz1/IuoVigTSnLS9a9ARjGEZB0VTS85LW9fM=
+  file: $GOPATH/bin/samba-dfree
+  skip_cleanup: true
+  on:
+    tags: true
