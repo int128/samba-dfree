@@ -1,19 +1,22 @@
-Disk space correction tool for Samba
-====================================
+Disk space calculator for Samba
+===============================
 
-Samba service may not report correct disk space if the published path consists from several disks.
-`samba-dfree` returns total and available space calculated from all directories in the current directory.
+Samba daemon does not report correct disk space if the exported path consists from several disks.
 
-For example, if the current directory has following directories,
+For example, it assumes `/home` is exported on Samba and consists from 3 disks as follows.
+Samba daemon should report free space of 210GB but actually reports 10GB.
 
-* ./mountpoint1 -> /dev/sdb
-* ./mountpoint2 -> /dev/sdc
-* ./mountpoint3 -> /dev/sdd
+Mount point | Disk     | Free space
+------------|----------|-----------
+/           | /dev/sda | 10GB
+/home/fiz   | /dev/sdb | 100GB
+/home/buz   | /dev/sdc | 100GB
 
-`samba-dfree` will return total and available kilo-bytes of above 3 disks.
+`samba-dfree` is an executable binary and called by samba daemon.
+It shows disk space calculated from all directories in the exported path.
 
-How to use
-----------
+How to configure
+----------------
 
 Install `samba-dfree` into `/etc/samba`.
 
@@ -32,4 +35,3 @@ Contributions
 -------------
 
 This is an open source software licensed under the Apache License Version 2.0. Feel free to open issues or pull requests.
-
