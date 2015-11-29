@@ -1,6 +1,8 @@
 Disk space calculator for Samba
 ===============================
 
+[![Build Status](https://travis-ci.org/int128/samba-dfree.svg?branch=master)](https://travis-ci.org/int128/samba-dfree)
+
 Samba daemon does not report correct disk space if the exported path consists from several disks.
 
 For example, it assumes `/home` is exported on Samba and consists from 3 disks as follows.
