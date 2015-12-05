@@ -6,6 +6,17 @@ import "io/ioutil"
 import "path/filepath"
 import "syscall"
 
+func queryBlocks(path string) (uint64, uint64) {
+	var stat syscall.Statfs_t
+	if err := syscall.Statfs(path, &stat); err != nil {
+		return 0, 0
+	} else {
+		total := stat.Blocks * uint64(stat.Bsize) / 1024
+		available := stat.Bavail * uint64(stat.Bsize) / 1024
+		return total, available
+	}
+}
+
 func main() {
 	exportdir := "."
 	if len(os.Args) > 1 {
@@ -22,15 +33,13 @@ func main() {
 		panic(err)
 	}
 
-	total, available := uint64(0), uint64(0)
+	totals, availables := queryBlocks(absexportdir)
 	for _, file := range files {
 		path := filepath.Join(absexportdir, file.Name())
-		var stat syscall.Statfs_t
-		if err := syscall.Statfs(path, &stat); err == nil {
-			total += stat.Blocks * uint64(stat.Bsize) / 1024
-			available += stat.Bavail * uint64(stat.Bsize) / 1024
-		}
+		total, available := queryBlocks(path)
+		totals += total
+		availables += available
 	}
 
-	fmt.Println(total, available)
+	fmt.Println(totals, availables)
 }
